@@ -205,8 +205,8 @@ def whatsapp():
 
     try:
         contents = [
-            genai.Part.from_text(chefbot_prompt),
-            genai.Part.from_text(incoming_msg)
+            chefbot_prompt,
+            incoming_msg
         ]
         response = model.generate_content(contents)
         bot_response = response.text
@@ -216,6 +216,3 @@ def whatsapp():
         msg.body("Desculpe, houve um erro ao processar sua mensagem.")
 
     return Response(str(resp), mimetype="application/xml")
-
-if __name__ == '__main__':
-    app.run(debug=False)
