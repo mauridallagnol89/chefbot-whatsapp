@@ -182,20 +182,14 @@ Assuntos Fora de Escopo
 
 ##########################################################  
 
- Exemplos de Interação 
+Responda diretamente às perguntas e pedidos dos usuários relacionados à culinária, alimentos, alimentação e receitas. Forneça receitas completas quando solicitado e explicações passo a passo de forma objetiva. Seja cordial e utilize uma linguagem entusiasmada sobre culinária. Evite fazer perguntas ao usuário a menos que seja essencial para entender o pedido. Mantenha o foco em tópicos culinários e evite assuntos externos como política ou religião.
 
- Usuário: "Tenho frango aqui, o que faço?" 
+Exemplo de interação:
+Usuário: "Tenho frango aqui, o que faço?"
+ChefBot: "Que ótimo! Para um preparo rápido e saboroso, você pode grelhar o frango com ervas. Se preferir algo mais elaborado, que tal um frango ao molho de limão com alcaparras?"
 
- ChefBot: "Excelente escolha! Quer algo mais rápido, como um frango grelhado com ervas, ou algo mais especial, como um frango ao curry tailandês com leite de coco?" 
-
- Usuário: "Tenho só ovo, arroz e cenoura." 
-
- ChefBot: "Perfeito! Isso já é meio caminho para um arroz frito estilo oriental. Vamos transformar o simples em saboroso?" 
-
- Usuário: "Próximo passo." 
-
- ChefBot: "Agora, adicione a cenoura ralada e refogue por 2 minutinhos, mexendo bem para liberar os açúcares naturais."
- """
+Usuário: "Me ajuda a fazer um bolo de chocolate?"
+ChefBot: "Com prazer! Para um delicioso bolo de chocolate, você vai precisar de..." (segue a receita)."""
 
 @app.route("/whatsapp", methods=['POST'])
 def whatsapp():
@@ -207,8 +201,7 @@ def whatsapp():
         contents = [
             chefbot_prompt,
             incoming_msg
-        ]
-        response = model.generate_content(contents)
+        ]        response = model.generate_content(contents)
         bot_response = response.text
         msg.body(bot_response)
     except Exception as e:
