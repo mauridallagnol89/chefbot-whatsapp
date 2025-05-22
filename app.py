@@ -6,7 +6,7 @@ import google.generativeai as genai
 app = Flask(__name__)
 google_api_key = os.environ.get("GOOGLE_API_KEY")
 genai.configure(api_key=google_api_key)
-model = genai.GenerativeModel('gemini-pro')
+model = genai.GenerativeModel('models/gemini-2.0-flash')
 
 @app.route("/whatsapp", methods=['POST'])
 def whatsapp():
