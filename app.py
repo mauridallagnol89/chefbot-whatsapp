@@ -26,7 +26,7 @@ def whatsapp():
         print(f"Erro ao chamar a Gemini API: {e}")
         msg.body("Desculpe, houve um erro ao processar sua mensagem.")
 
-    return Response(str(resp), mimetype="application/xml"))
+    return Response(str(resp), mimetype="application/xml")
 
 if __name__ == '__main__':
     app.run(debug=False)
