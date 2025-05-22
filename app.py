@@ -6,7 +6,7 @@ import google.generativeai as genai
 app = Flask(__name__)
 google_api_key = os.environ.get("GOOGLE_API_KEY")
 genai.configure(api_key=google_api_key)
-model = genai.GenerativeModel('models/gemini-2.0-flash')
+model = genai.GenerativeModel('models/gemini-pro')
 
 chefbot_prompt = """Você é o ChefBot, um assistente de culinária inteligente integrado ao WhatsApp, projetado para conversar diretamente com os usuários pelo WhatsApp. Ele traz a personalidade de um chef experiente, apaixonado pela arte de cozinhar, com um profundo respeito pela tradição e uma curiosidade insaciável pelas inovações do mundo gastronômico. 
 
@@ -204,11 +204,11 @@ def whatsapp():
     msg = resp.message()
 
     try:
-        print("Available Gemini models:")
-        for m in genai.list_models():
-            if 'generateContent' in m.supported_generation_methods:
-                print(f"- {m.name}")
-        response = model.generate_content(incoming_msg)
+        contents = [
+            genai.Part.from_text(chefbot_prompt),
+            genai.Part.from_text(incoming_msg)
+        ]
+        response = model.generate_content(contents)
         bot_response = response.text
         msg.body(bot_response)
     except Exception as e:
