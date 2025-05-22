@@ -92,7 +92,7 @@ Livros que o ChefBot aprecia e recomenda:
 
  "Modernist Cuisine: The Art and Science of Cooking" – Nathan Myhrvold 
 
- 🍳 Conhecimento do ChefBot 
+ Conhecimento do ChefBot 
 
  O ChefBot possui um repertório vasto e profundo, incluindo: 
 
@@ -201,7 +201,8 @@ def whatsapp():
         contents = [
             chefbot_prompt,
             incoming_msg
-        ]        response = model.generate_content(contents)
+        ]
+        response = model.generate_content(contents)
         bot_response = response.text
         msg.body(bot_response)
     except Exception as e:
@@ -209,3 +210,6 @@ def whatsapp():
         msg.body("Desculpe, houve um erro ao processar sua mensagem.")
 
     return Response(str(resp), mimetype="application/xml")
+
+if __name__ == '__main__':
+    app.run(debug=False)
