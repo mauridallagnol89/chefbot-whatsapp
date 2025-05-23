@@ -221,11 +221,11 @@ def whatsapp():
     history = conversations.get(from_number, [])
 
     contents = [
-        genai.Part.from_text(chefbot_prompt),
-        genai.Part.from_text(incoming_msg)
+        chefbot_prompt,
+        incoming_msg
     ]
     for entry in history:
-        contents.append(genai.Part.from_text(entry))
+        contents.append(entry)
 
     try:
         response = model.generate_content(contents)
@@ -238,6 +238,3 @@ def whatsapp():
         msg.body("Desculpe, houve um erro ao processar sua mensagem.")
 
     return Response(str(resp), mimetype="application/xml")
-
-if __name__ == '__main__':
-    app.run(debug=False)
