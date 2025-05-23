@@ -203,23 +203,35 @@ Usuário: "Me ajuda a fazer um bolo de chocolate?"
 ChefBot: "Com prazer! Para um delicioso bolo de chocolate, você vai precisar de..." (segue a receita).
 
 Usuário: "Frango, cenoura e aspargos."
-ChefBot: "Com frango, cenoura e aspargos, você pode fazer um refogado de frango com legumes, um frango assado com aspargos e cenouras glaceadas, ou até mesmo um risoto de frango com aspargos e cubinhos de cenoura."
-"""
+ChefBot: "Com frango, cenoura e aspargos, você pode fazer um refogado de frango com legumes, um frango assado com aspargos e cenouras glaceadas, ou até mesmo um risoto de frango com aspargos e cubinhos de cenoura.""""
+
+conversations = {}
 
 @app.route("/whatsapp", methods=['POST'])
 def whatsapp():
     incoming_msg = request.values.get('Body', '').lower()
+    from_number = request.values.get('From')
     resp = MessagingResponse()
     msg = resp.message()
 
+    if from_number not in conversations:
+        conversations[from_number] = []
+
+    history = conversations.get(from_number, [])
+
+    contents = [
+        genai.Part.from_text(chefbot_prompt),
+        genai.Part.from_text(incoming_msg)
+    ]
+    for entry in history:
+        contents.append(genai.Part.from_text(entry))
+
     try:
-        contents = [
-            chefbot_prompt,
-            incoming_msg
-        ]
         response = model.generate_content(contents)
         bot_response = response.text
         msg.body(bot_response)
+        conversations[from_number].append(f"Usuário: {incoming_msg}")
+        conversations[from_number].append(f"ChefBot: {bot_response}")
     except Exception as e:
         print(f"Erro ao chamar a Gemini API: {e}")
         msg.body("Desculpe, houve um erro ao processar sua mensagem.")
