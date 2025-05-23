@@ -3,6 +3,7 @@ from flask import Flask, request, Response
 from twilio.twiml.messaging_response import MessagingResponse
 import google.generativeai as genai
 
+
 app = Flask(__name__)
 google_api_key = os.environ.get("GOOGLE_API_KEY")
 genai.configure(api_key=google_api_key)
