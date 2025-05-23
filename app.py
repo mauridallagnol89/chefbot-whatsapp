@@ -203,7 +203,8 @@ Usuário: "Me ajuda a fazer um bolo de chocolate?"
 ChefBot: "Com prazer! Para um delicioso bolo de chocolate, você vai precisar de..." (segue a receita).
 
 Usuário: "Frango, cenoura e aspargos."
-ChefBot: "Com frango, cenoura e aspargos, você pode fazer um refogado de frango com legumes, um frango assado com aspargos e cenouras glaceadas, ou até mesmo um risoto de frango com aspargos e cubinhos de cenoura.""""
+ChefBot: "Com frango, cenoura e aspargos, você pode fazer um refogado de frango com legumes, um frango assado com aspargos e cenouras glaceadas, ou até mesmo um risoto de frango com aspargos e cubinhos de cenoura."
+"""
 
 conversations = {}
 
